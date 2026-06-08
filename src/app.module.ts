@@ -8,20 +8,28 @@ import { OrdersModule } from './orders/orders.module';
 import { CommonModule } from './common/common.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CacheModule } from '@nestjs/cache-manager';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST ?? 'localhost',
-      port: Number(process.env.DB_PORT ?? 5432),
-      username: process.env.DB_USERNAME ?? 'postgres',
-      password: process.env.DB_PASSWORD ?? 'password',
-      database: process.env.DB_NAME ?? 'r&t-global-restaurant',
-      autoLoadEntities: true,
-      synchronize: true,
-      logging: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: ['.env.local', '.env'],
+    }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.getOrThrow<string>('DATABASE_HOST'),
+        port: Number(configService.getOrThrow<string>('DATABASE_PORT')),
+        username: configService.getOrThrow<string>('DATABASE_USER'),
+        password: configService.getOrThrow<string>('DATABASE_PASS'),
+        database: configService.getOrThrow<string>('DATABASE_NAME'),
+        autoLoadEntities: true,
+        synchronize: configService.get<string>('NODE_ENV') !== 'production',
+        logging: configService.get<string>('NODE_ENV') !== 'production',
+      }),
     }),
     CacheModule.register({
       isGlobal: true,

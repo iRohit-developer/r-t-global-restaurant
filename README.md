@@ -46,6 +46,25 @@ NestJS backend for restaurant operations with JWT auth, role-based permissions, 
 npm install
 ```
 
+## Environment Configuration
+
+Create environment files before running the app:
+
+- `.env` for development
+- `.env.production` for production
+
+Required variables:
+
+- `PORT`
+- `DATABASE_HOST`
+- `DATABASE_PORT`
+- `DATABASE_USER`
+- `DATABASE_PASS`
+- `DATABASE_NAME`
+- `JWT_SECRET`
+
+Use `.env.example` as the template for local setup.
+
 ## Run
 
 ```bash
