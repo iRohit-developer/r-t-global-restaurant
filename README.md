@@ -2,6 +2,17 @@
 
 NestJS backend for restaurant operations with JWT auth, role-based permissions, menu management, and table order processing.
 
+## Complete Documentation
+
+- Full project documentation is available in [COMPLETE_DOCUMENTATION.md](COMPLETE_DOCUMENTATION.md).
+- Client-facing API reference is available in [API_GUIDE.md](API_GUIDE.md).
+- Developer onboarding checklist is available in [DEVELOPER_ONBOARDING_CHECKLIST.md](DEVELOPER_ONBOARDING_CHECKLIST.md).
+- Order lifecycle sequence diagram is available in [ORDER_LIFECYCLE_SEQUENCE.md](ORDER_LIFECYCLE_SEQUENCE.md).
+
+## Architecture Documentation
+
+- Detailed end-to-end flowcharts and function-level mappings are available in [architecture-flow.md](architecture-flow.md).
+
 ## Domain
 
 ### Entities
