@@ -2,17 +2,6 @@
 
 NestJS backend for restaurant operations with JWT auth, role-based permissions, menu management, and table order processing.
 
-## Complete Documentation
-
-- Full project documentation is available in [COMPLETE_DOCUMENTATION.md](COMPLETE_DOCUMENTATION.md).
-- Client-facing API reference is available in [API_GUIDE.md](API_GUIDE.md).
-- Developer onboarding checklist is available in [DEVELOPER_ONBOARDING_CHECKLIST.md](DEVELOPER_ONBOARDING_CHECKLIST.md).
-- Order lifecycle sequence diagram is available in [ORDER_LIFECYCLE_SEQUENCE.md](ORDER_LIFECYCLE_SEQUENCE.md).
-
-## Architecture Documentation
-
-- Detailed end-to-end flowcharts and function-level mappings are available in [architecture-flow.md](architecture-flow.md).
-
 ## Domain
 
 ### Entities
@@ -61,8 +50,8 @@ npm install
 
 Create environment files before running the app:
 
-- `.env` for development
-- `.env.production` for production
+- `.env` for shared local defaults
+- `.env.local` for local overrides
 
 Required variables:
 
@@ -169,10 +158,6 @@ Authorization: Bearer <access_token>
 - GET /menu/:id is cached manually with key menu_item_<id>.
 - Cache is invalidated on create/update/delete and availability updates.
 
-## Notes
-
-- Users are currently maintained in memory for training/demo scenarios.
-
 ## Requirement Checklist Mapping
 
 - Min 2 entities: implemented with TypeORM entities (User, MenuItem, Order, OrderItem)
@@ -184,25 +169,3 @@ Authorization: Bearer <access_token>
 - Caching: route-level cache on GET /menu, manual cache on GET /menu/:id, invalidation on create/update/delete
 - Unit tests: service-level tests with mocked repository/cache and business rule checks
 - E2E tests: protected CRUD flow and explicit 401/403 assertions
-- Docker: working Dockerfile + docker-compose.yml with Postgres service
-
-## Postman Collection
-
-- Import `Restaurant-System.postman_collection.json` from the project root.
-- Run in this order for smooth variable setup:
-  - Auth -> Login Admin
-  - Auth -> Login Staff
-  - Menu -> Create Menu Item (Admin)
-  - Orders -> Create Order (Staff)
-
-## Docker
-
-```bash
-docker compose up --build
-```
-
-This starts:
-
-- API: http://localhost:3000
-- Swagger: http://localhost:3000/docs
-- PostgreSQL on localhost:5432
